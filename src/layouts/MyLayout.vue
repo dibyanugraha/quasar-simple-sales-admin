@@ -5,7 +5,7 @@
         <q-btn
           flat
           dense
-          @click="leftDrawerOpen = !leftDrawerOpen"
+          @click="leftDrawerOpen = !leftDrawerOpen;trigger()"
           aria-label="Menu"
         >
           <q-icon name="menu" />
@@ -39,6 +39,15 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+    <div class="q-pa-md">
+    <q-ajax-bar
+      ref="bar"
+      position="bottom"
+      color="accent"
+      size="5px"
+      skip-hijack
+    />
+    </div>
   </q-layout>
 </template>
 
@@ -54,7 +63,18 @@ export default {
     }
   },
   methods: {
-    openURL
+    openURL,
+    trigger () {
+      const bar = this.$refs.bar
+
+      bar.start()
+
+      this.timer = setTimeout(() => {
+        if (this.$refs.bar) {
+          this.$refs.bar.stop()
+        }
+      }, Math.random() * 3000 + 1000)
+    }
   }
 }
 </script>
