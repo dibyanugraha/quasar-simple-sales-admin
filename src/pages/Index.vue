@@ -16,8 +16,8 @@
         selection="multiple"
         :selected.sync="selected"
       >
-      <template v-slot:top-right>
-        <q-btn flat rounded color="primary" label="$t('adminTitle')" />
+        <template v-slot:top-right>
+          <q-btn flat rounded color="primary" label="$t('adminTitle')" />
         </template>
         <template v-slot:body="props">
           <q-tr :props="props">
@@ -25,30 +25,34 @@
               <q-checkbox class="q-pl-auto" v-model="props.selected" />
             </q-td>
             <q-td key="desc" :props="props">
-                <q-select
-                  borderless
-                  v-model="model"
-                  use-input
-                  hide-selected
-                  fill-input
-                  input-debounce="0"
-                  :options="options"
-                  @filter="filterFn"
-                >
-                  <template v-slot:no-option>
-                    <q-item>
-                      <q-item-section class="text-grey">No results</q-item-section>
-                    </q-item>
-                  </template>
-                </q-select>
+              <q-select
+                borderless
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                @filter="filterFn"
+              >
+                <template v-slot:no-option>
+                  <q-item>
+                    <q-item-section class="text-grey">No results</q-item-section>
+                  </q-item>
+                </template>
+              </q-select>
             </q-td>
-          <q-td key="calories" :props="props">
-              <q-input borderless type="text" v-model="props.row.calories"
-              mask="#.##"
-              input-class="text-right"
-              fill-mask="0"
-        reverse-fill-mask/>
-          </q-td>
+            <q-td key="calories" :props="props">
+              <q-input
+                borderless
+                type="text"
+                v-model="props.row.calories"
+                mask="#.##"
+                input-class="text-right"
+                fill-mask="0"
+                reverse-fill-mask
+              />
+            </q-td>
             <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
             <q-td key="carbs" :props="props">{{ props.row.carbs }}</q-td>
             <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
@@ -65,15 +69,13 @@
 </template>
 
 <script>
-const stringOptions = [
-  'Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'
-]
+const stringOptions = ["Google", "Facebook", "Twitter", "Apple", "Oracle"];
 
 export default {
   name: "Index",
   data() {
     return {
-      model: null,      
+      model: null,
       options: stringOptions,
       loading: true,
       selected: [],
@@ -237,11 +239,13 @@ export default {
         this.loading = false;
       }, 5000);
     },
-    filterFn (val, update, abort) {
+    filterFn(val, update, abort) {
       update(() => {
-        const needle = val.toLowerCase()
-        this.options = stringOptions.filter(v => v.toLowerCase().indexOf(needle) > -1)
-      })
+        const needle = val.toLowerCase();
+        this.options = stringOptions.filter(
+          v => v.toLowerCase().indexOf(needle) > -1
+        );
+      });
     }
   },
   mounted() {
