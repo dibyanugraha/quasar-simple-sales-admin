@@ -1,22 +1,42 @@
 <template>
-
   <div class="q-pa-md">
-    <q-btn label="Refresh" color="primary" @click="onRefresh" class="q-mb-md" />
     <q-table
-      class="my-sticky-header-column-table"
       title="Treats"
       :data="data"
       :columns="columns"
       row-key="name"
-      :loading="loading"
       selection="multiple"
       :selected.sync="selected"
-    ></q-table>
-    <div class="q-mt-md">
-      Selected: {{ JSON.stringify(selected) }}
-    </div>
+    >
+
+      <template v-slot:body="props">
+        <q-tr :props="props">
+          <q-td auto-width>
+            <q-checkbox class="q-pl-auto" v-model="props.selected" />
+          </q-td>
+          <q-td key="desc" :props="props">
+            {{ props.row.name }}
+            <q-btn dense round flat :icon="props.expand ? 'arrow_drop_up' : 'arrow_drop_down'" @click="props.expand = !props.expand" />
+          </q-td>
+          <q-td key="calories" :props="props">{{ props.row.calories }}</q-td>
+          <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
+          <q-td key="carbs" :props="props">{{ props.row.carbs }}</q-td>
+          <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
+          <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
+          <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
+          <q-td key="iron" :props="props">
+            <q-badge square color="amber">{{ props.row.iron }}</q-badge>
+          </q-td>
+        </q-tr>
+        <q-tr v-show="props.expand" :props="props">
+          <q-td colspan="100%">
+            <div class="text-left">This is expand slot for row above: {{ props.row.name }}.</div>
+          </q-td>
+        </q-tr>
+      </template>
+
+    </q-table>
   </div>
-  
 </template>
 
 <script>
@@ -28,7 +48,7 @@ export default {
       selected: [],
       columns: [
         {
-          name: 'name',
+          name: 'desc',
           required: true,
           label: 'Dessert (100g serving)',
           align: 'left',
@@ -36,43 +56,14 @@ export default {
           format: val => `${val}`,
           sortable: true
         },
-        {
-          name: 'calories',
-          align: 'center',
-          label: 'Calories',
-          field: 'calories',
-          sortable: true
-        },
-        { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
-        { name: 'carbs', label: 'Carbs (g)', field: 'carbs', sortable: true },
-        {
-          name: 'protein',
-          label: 'Protein (g)',
-          field: 'protein',
-          sortable: true
-        },
-        {
-          name: 'sodium',
-          label: 'Sodium (mg)',
-          field: 'sodium',
-          sortable: true
-        },
-        {
-          name: 'calcium',
-          label: 'Calcium (%)',
-          field: 'calcium',
-          sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
-        },
-        {
-          name: 'iron',
-          label: 'Iron (%)',
-          field: 'iron',
-          sortable: true,
-          sort: (a, b) => parseInt(a, 10) - parseInt(b, 10)
-        }
+        { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
+        { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true, style: 'width: 10px' },
+        { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
+        { name: 'protein', label: 'Protein (g)', field: 'protein' },
+        { name: 'sodium', label: 'Sodium (mg)', field: 'sodium' },
+        { name: 'calcium', label: 'Calcium (%)', field: 'calcium', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) },
+        { name: 'iron', label: 'Iron (%)', field: 'iron', sortable: true, sort: (a, b) => parseInt(a, 10) - parseInt(b, 10) }
       ],
-
       data: [
         {
           name: 'Frozen Yogurt',
