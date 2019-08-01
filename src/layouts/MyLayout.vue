@@ -58,7 +58,7 @@ export default {
   name: 'MyLayout',
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop,
+      leftDrawerOpen: false,
       locale: this.$q.lang.isoName
     }
   },

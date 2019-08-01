@@ -51,8 +51,12 @@ module.exports = function (ctx) {
         'QTr',
         'QTd',
         'QBadge',
-        'QToggle',
-        'QCheckbox'
+        'QCheckbox',
+        'QBreadcrumbs',
+        'QBreadcrumbsEl',
+        'QSelect',
+        'QPopupEdit',
+        'QInput'
       ],
 
       directives: [
