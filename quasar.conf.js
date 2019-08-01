@@ -56,7 +56,14 @@ module.exports = function (ctx) {
         'QBreadcrumbsEl',
         'QSelect',
         'QPopupEdit',
-        'QInput'
+        'QInput',
+        'QCarousel',
+        'QCarouselControl',
+        'QCarouselSlide',
+        'QExpansionItem',
+        'QCardSection',
+        'QCard',
+        'QSeparator'
       ],
 
       directives: [
