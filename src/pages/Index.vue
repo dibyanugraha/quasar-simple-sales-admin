@@ -20,9 +20,20 @@
           <q-btn flat rounded color="primary" label="$t('adminTitle')" />
         </template>
         <template v-slot:body="props">
+          <q-menu touch-position context-menu>
+            <q-list style="min-width: 100px">
+              <q-item clickable v-close-popup>
+                <q-item-section>New</q-item-section>
+              </q-item>
+              <q-separator />
+              <q-item clickable v-close-popup>
+                <q-item-section>Delete</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
           <q-tr :props="props">
             <q-td auto-width>
-              <q-checkbox class="q-pl-auto" v-model="props.selected" />
+              <q-checkbox class="q-pl-auto" v-model="props.selected"></q-checkbox>
             </q-td>
             <q-td key="desc" :props="props">
               <q-select
