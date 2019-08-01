@@ -63,7 +63,8 @@ module.exports = function (ctx) {
         'QExpansionItem',
         'QCardSection',
         'QCard',
-        'QSeparator'
+        'QSeparator',
+        'QScrollArea'
       ],
 
       directives: [
