@@ -5,7 +5,7 @@
         <q-btn
           flat
           dense
-          @click="leftDrawerOpen = !leftDrawerOpen;trigger()"
+          @click="leftDrawerOpen = !leftDrawerOpen"
           aria-label="Menu"
         >
           <q-icon name="menu" />
