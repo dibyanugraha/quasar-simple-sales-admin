@@ -66,10 +66,7 @@ module.exports = function (ctx) {
         'QSeparator',
         'QScrollArea',
         'QMenu',
-        'QToolbar',
-        'QToolbarTitle',
         'QSpace',
-        'QBtnDropdown',
         'QAvatar',
         'QForm',
         'QToggle'
