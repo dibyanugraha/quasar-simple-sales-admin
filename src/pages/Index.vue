@@ -10,16 +10,16 @@
       flat
     >
       <template v-slot:top-right>
-        <q-btn flat rounded color="primary" label="$t('adminTitle')" />
+        <q-toggle color="blue" v-model="value" label="Editable" />
       </template>
       <template v-slot:body="props">
         <q-menu touch-position context-menu>
           <q-list style="min-width: 100px">
-            <q-item clickable v-close-popup>
+            <q-item clickable v-close-popup @click="showNotif">
               <q-item-section>New</q-item-section>
             </q-item>
             <q-separator />
-            <q-item clickable v-close-popup>
+            <q-item clickable v-close-popup @click="showNotif">
               <q-item-section>Delete</q-item-section>
             </q-item>
           </q-list>
@@ -54,7 +54,6 @@
               mask="#.##"
               input-class="text-right"
               fill-mask="0"
-              reverse-fill-mask
             />
           </q-td>
           <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
@@ -78,6 +77,7 @@ export default {
   name: "Index",
   data() {
     return {
+      value: true,
       model: null,
       options: stringOptions,
       loading: true,
@@ -249,6 +249,12 @@ export default {
           v => v.toLowerCase().indexOf(needle) > -1
         );
       });
+    },
+    showNotif () {
+      this.$q.notify({
+        message: 'Deleted',
+        color: 'blue'
+      })
     }
   },
   mounted() {

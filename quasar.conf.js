@@ -80,7 +80,16 @@ module.exports = function (ctx) {
       // Quasar plugins
       plugins: [
         'Notify'
-      ]
+      ],
+
+      config: {
+        notify: {
+          position: 'bottom',
+          timeout: 1000,
+          textColor: 'white',
+          actions: [{ icon: 'close', color: 'white' }]
+        }
+      }
     },
 
     supportIE: false,
