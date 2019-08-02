@@ -65,7 +65,14 @@ module.exports = function (ctx) {
         'QCard',
         'QSeparator',
         'QScrollArea',
-        'QMenu'
+        'QMenu',
+        'QToolbar',
+        'QToolbarTitle',
+        'QSpace',
+        'QBtnDropdown',
+        'QAvatar',
+        'QForm',
+        'QToggle'
       ],
 
       directives: [

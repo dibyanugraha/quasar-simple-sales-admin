@@ -13,6 +13,13 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Menu.vue') }
     ]
+  },
+  {
+    path: '/masterDetail',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/MasterDetail.vue') }
+    ]
   }
 ]
 
