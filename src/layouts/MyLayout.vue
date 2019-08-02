@@ -63,6 +63,14 @@
     </q-drawer>
 
     <q-page-container>
+      
+    <div class="q-pa-md">
+      <q-breadcrumbs>
+        <q-breadcrumbs-el label="Home" icon="home" />
+        <q-breadcrumbs-el label="Components" icon="widgets" />
+        <q-breadcrumbs-el label="Breadcrumbs" />
+      </q-breadcrumbs>
+    </div>
       <router-view />
     </q-page-container>
     <div class="q-pa-md">

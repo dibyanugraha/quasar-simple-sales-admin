@@ -92,16 +92,13 @@
           </q-item-section>
         </template>
           <q-table
-            title="Treats"
             :data="data"
             :columns="columns"
             row-key="name"
             selection="multiple"
             :selected.sync="selected"
+            flat
           >
-            <template v-slot:top-right>
-              <q-btn flat rounded color="primary" label="$t('adminTitle')" />
-            </template>
             <template v-slot:body="props">
               <q-menu touch-position context-menu>
                 <q-list style="min-width: 100px">

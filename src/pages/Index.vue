@@ -1,81 +1,73 @@
 <template>
   <div>
-    <div class="q-pa-md">
-      <q-breadcrumbs>
-        <q-breadcrumbs-el label="Home" icon="home" />
-        <q-breadcrumbs-el label="Components" icon="widgets" />
-        <q-breadcrumbs-el label="Breadcrumbs" />
-      </q-breadcrumbs>
-    </div>
-    <div>
-      <q-table
-        title="Treats"
-        :data="data"
-        :columns="columns"
-        row-key="name"
-        selection="multiple"
-        :selected.sync="selected"
-      >
-        <template v-slot:top-right>
-          <q-btn flat rounded color="primary" label="$t('adminTitle')" />
-        </template>
-        <template v-slot:body="props">
-          <q-menu touch-position context-menu>
-            <q-list style="min-width: 100px">
-              <q-item clickable v-close-popup>
-                <q-item-section>New</q-item-section>
-              </q-item>
-              <q-separator />
-              <q-item clickable v-close-popup>
-                <q-item-section>Delete</q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu>
-          <q-tr :props="props">
-            <q-td auto-width>
-              <q-checkbox class="q-pl-auto" v-model="props.selected"></q-checkbox>
-            </q-td>
-            <q-td key="desc" :props="props">
-              <q-select
-                borderless
-                v-model="model"
-                use-input
-                hide-selected
-                fill-input
-                input-debounce="0"
-                :options="options"
-                @filter="filterFn"
-              >
-                <template v-slot:no-option>
-                  <q-item>
-                    <q-item-section class="text-grey">No results</q-item-section>
-                  </q-item>
-                </template>
-              </q-select>
-            </q-td>
-            <q-td key="calories" :props="props">
-              <q-input
-                borderless
-                type="text"
-                v-model="props.row.calories"
-                mask="#.##"
-                input-class="text-right"
-                fill-mask="0"
-                reverse-fill-mask
-              />
-            </q-td>
-            <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
-            <q-td key="carbs" :props="props">{{ props.row.carbs }}</q-td>
-            <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
-            <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
-            <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
-            <q-td key="iron" :props="props">
-              <q-badge square color="amber">{{ props.row.iron }}</q-badge>
-            </q-td>
-          </q-tr>
-        </template>
-      </q-table>
-    </div>
+    <q-table
+      title="Treats"
+      :data="data"
+      :columns="columns"
+      row-key="name"
+      selection="multiple"
+      :selected.sync="selected"
+      flat
+    >
+      <template v-slot:top-right>
+        <q-btn flat rounded color="primary" label="$t('adminTitle')" />
+      </template>
+      <template v-slot:body="props">
+        <q-menu touch-position context-menu>
+          <q-list style="min-width: 100px">
+            <q-item clickable v-close-popup>
+              <q-item-section>New</q-item-section>
+            </q-item>
+            <q-separator />
+            <q-item clickable v-close-popup>
+              <q-item-section>Delete</q-item-section>
+            </q-item>
+          </q-list>
+        </q-menu>
+        <q-tr :props="props">
+          <q-td auto-width>
+            <q-checkbox class="q-pl-auto" v-model="props.selected"></q-checkbox>
+          </q-td>
+          <q-td key="desc" :props="props">
+            <q-select
+              borderless
+              v-model="model"
+              use-input
+              hide-selected
+              fill-input
+              input-debounce="0"
+              :options="options"
+              @filter="filterFn"
+            >
+              <template v-slot:no-option>
+                <q-item>
+                  <q-item-section class="text-grey">No results</q-item-section>
+                </q-item>
+              </template>
+            </q-select>
+          </q-td>
+          <q-td key="calories" :props="props">
+            <q-input
+              borderless
+              type="text"
+              v-model="props.row.calories"
+              mask="#.##"
+              input-class="text-right"
+              fill-mask="0"
+              reverse-fill-mask
+            />
+          </q-td>
+          <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
+          <q-td key="carbs" :props="props">{{ props.row.carbs }}</q-td>
+          <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
+          <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
+          <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
+          <q-td key="iron" :props="props">
+            <q-badge square color="amber">{{ props.row.iron }}</q-badge>
+          </q-td>
+        </q-tr>
+      </template>
+    </q-table>
   </div>
 </template>
 
