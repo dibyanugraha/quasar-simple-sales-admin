@@ -1,72 +1,147 @@
 <template>
-  <div>
-    <q-table
-      title="Treats"
-      :data="data"
-      :columns="columns"
-      row-key="name"
-      selection="multiple"
-      :selected.sync="selected"
-      flat
-    >
-      <template v-slot:top-right>
-        <q-toggle color="blue" v-model="value" label="Editable" />
-      </template>
-      <template v-slot:body="props">
-        <q-menu touch-position context-menu>
-          <q-list style="min-width: 100px">
-            <q-item clickable v-close-popup @click="showNotif">
-              <q-item-section>New</q-item-section>
-            </q-item>
-            <q-separator />
-            <q-item clickable v-close-popup @click="showNotif">
-              <q-item-section>Delete</q-item-section>
-            </q-item>
-          </q-list>
-        </q-menu>
-        <q-tr :props="props">
-          <q-td auto-width>
-            <q-checkbox class="q-pl-auto" v-model="props.selected"></q-checkbox>
-          </q-td>
-          <q-td key="desc" :props="props">
-            <q-select
-              borderless
-              v-model="model"
-              use-input
-              hide-selected
-              fill-input
-              input-debounce="0"
-              :options="options"
-              @filter="filterFn"
-            >
-              <template v-slot:no-option>
-                <q-item>
-                  <q-item-section class="text-grey">No results</q-item-section>
+  <div class="q-pa-md">
+    <div class="row q-col-gutter-md">
+      <div class="col-6 col-md-2" v-if=true>
+        <q-list bordered>
+          <q-expansion-item
+            group="group01"
+            icon="explore"
+            label="First"
+            default-opened
+            header-class="text-primary"
+          >
+            <q-card>
+              <q-card-section>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                eveniet doloribus ullam aliquid.
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+
+          <q-separator />
+
+          <q-expansion-item
+            group="group01"
+            icon="perm_identity"
+            label="Second"
+            header-class="text-teal"
+          >
+            <q-card>
+              <q-card-section>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                eveniet doloribus ullam aliquid.
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+
+          <q-separator />
+
+          <q-expansion-item
+            group="group01"
+            icon="shopping_cart"
+            label="Third"
+            header-class="text-purple"
+          >
+            <q-card>
+              <q-card-section>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                eveniet doloribus ullam aliquid.
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+
+          <q-separator />
+
+          <q-expansion-item
+            group="group01"
+            icon="bluetooth"
+            label="Fourth"
+            header-class="bg-teal text-white"
+            expand-icon-class="text-white"
+          >
+            <q-card class="bg-teal-2">
+              <q-card-section>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
+                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
+                eveniet doloribus ullam aliquid.
+              </q-card-section>
+            </q-card>
+          </q-expansion-item>
+        </q-list>
+      </div>
+      <div class="col col-md">
+        <q-table
+          title="Treats"
+          :data="data"
+          :columns="columns"
+          row-key="name"
+          selection="multiple"
+          :selected.sync="selected"
+          flat
+        >
+          <template v-slot:top-right>
+            <q-toggle color="blue" v-model="value" label="Editable" />
+          </template>
+          <template v-slot:body="props">
+            <q-menu touch-position context-menu>
+              <q-list style="min-width: 100px">
+                <q-item clickable v-close-popup @click="showNotif">
+                  <q-item-section>New</q-item-section>
                 </q-item>
-              </template>
-            </q-select>
-          </q-td>
-          <q-td key="calories" :props="props">
-            <q-input
-              borderless
-              type="text"
-              v-model="props.row.calories"
-              mask="#.##"
-              input-class="text-right"
-              fill-mask="0"
-            />
-          </q-td>
-          <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
-          <q-td key="carbs" :props="props">{{ props.row.carbs }}</q-td>
-          <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
-          <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
-          <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
-          <q-td key="iron" :props="props">
-            <q-badge square color="amber">{{ props.row.iron }}</q-badge>
-          </q-td>
-        </q-tr>
-      </template>
-    </q-table>
+                <q-separator />
+                <q-item clickable v-close-popup @click="showNotif">
+                  <q-item-section>Delete</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+            <q-tr :props="props">
+              <q-td auto-width>
+                <q-checkbox class="q-pl-auto" v-model="props.selected"></q-checkbox>
+              </q-td>
+              <q-td key="desc" :props="props">
+                <q-select
+                  borderless
+                  v-model="model"
+                  use-input
+                  hide-selected
+                  fill-input
+                  input-debounce="0"
+                  :options="options"
+                  @filter="filterFn"
+                >
+                  <template v-slot:no-option>
+                    <q-item>
+                      <q-item-section class="text-grey">No results</q-item-section>
+                    </q-item>
+                  </template>
+                </q-select>
+              </q-td>
+              <q-td key="calories" :props="props">
+                <q-input
+                  borderless
+                  type="text"
+                  v-model="props.row.calories"
+                  mask="#.##"
+                  input-class="text-right"
+                  fill-mask="0"
+                />
+              </q-td>
+              <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
+              <q-td key="carbs" :props="props">{{ props.row.carbs }}</q-td>
+              <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
+              <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
+              <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
+              <q-td key="iron" :props="props">
+                <q-badge square color="amber">{{ props.row.iron }}</q-badge>
+              </q-td>
+            </q-tr>
+          </template>
+        </q-table>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -250,11 +325,11 @@ export default {
         );
       });
     },
-    showNotif () {
+    showNotif() {
       this.$q.notify({
-        message: 'Deleted',
-        color: 'blue'
-      })
+        message: "Deleted",
+        color: "blue"
+      });
     }
   },
   mounted() {
