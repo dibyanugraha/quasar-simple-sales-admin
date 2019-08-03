@@ -27,8 +27,7 @@
                   label="Your name *"
                   hint="Name and surname"
                   lazy-rules
-                  :rules="[ val => val && val.length > 0 || 'Please type something']"
-                />
+                  :rules="[ val => val && val.length > 0 || 'Please type something']"/>
 
                 <q-input
                   dense
@@ -36,11 +35,7 @@
                   v-model="age"
                   label="Your age *"
                   lazy-rules
-                  :rules="[
-          val => val !== null && val !== '' || 'Please type your age',
-          val => val > 0 && val < 100 || 'Please type a real age'
-        ]"
-                />
+                  :rules="[val => val !== null && val !== '' || 'Please type your age', val => val > 0 && val < 100 || 'Please type a real age']"/>
               </div>
 
               <div class="col q-mr-md">
@@ -50,8 +45,7 @@
                   label="Your name *"
                   hint="Name and surname"
                   lazy-rules
-                  :rules="[ val => val && val.length > 0 || 'Please type something']"
-                />
+                  :rules="[ val => val && val.length > 0 || 'Please type something']"/>
 
                 <q-input
                   dense
@@ -59,11 +53,7 @@
                   v-model="age"
                   label="Your age *"
                   lazy-rules
-                  :rules="[
-          val => val !== null && val !== '' || 'Please type your age',
-          val => val > 0 && val < 100 || 'Please type a real age'
-        ]"
-                />
+                  :rules="[val => val !== null && val !== '' || 'Please type your age', val => val > 0 && val < 100 || 'Please type a real age']"/>
               </div>
             </div>
 

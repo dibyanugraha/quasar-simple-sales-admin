@@ -69,7 +69,8 @@ module.exports = function (ctx) {
         'QSpace',
         'QAvatar',
         'QForm',
-        'QToggle'
+        'QToggle',
+        'QOptionGroup'
       ],
 
       directives: [
