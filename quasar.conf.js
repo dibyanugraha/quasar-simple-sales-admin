@@ -102,6 +102,12 @@ module.exports = function (ctx) {
       // analyze: true,
       // extractCSS: false,
       extendWebpack (cfg) {
+      },
+      
+      chainWebpack (chain, { isClient }) {
+        chain.module.rule('pug')
+          .test(/\.pug$/)
+          .use('pug-loader').loader('pug-plain-loader')
       }
     },
 
