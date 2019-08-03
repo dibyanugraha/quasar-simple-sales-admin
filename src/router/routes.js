@@ -15,10 +15,17 @@ const routes = [
     ]
   },
   {
-    path: '/masterDetail',
+    path: '/document',
     component: () => import('layouts/MyLayout.vue'),
     children: [
       { path: '', component: () => import('pages/MasterDetail.vue') }
+    ]
+  },
+  {
+    path: '/setup',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/setup.vue') }
     ]
   }
 ]

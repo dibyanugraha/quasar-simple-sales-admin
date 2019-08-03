@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <div class="row q-col-gutter-md">
-      <div class="col-6 col-md-2" v-if=true>
+      <div class="col-6 col-md-2" v-if="showFilter">
         <q-list bordered>
           <q-expansion-item
             group="group01"
@@ -83,15 +83,18 @@
           flat
         >
           <template v-slot:top-right>
-            <q-toggle color="blue" v-model="value" label="Editable" />
+            <q-toggle color="blue" v-model="isTableEditable" />
           </template>
           <template v-slot:body="props">
             <q-menu touch-position context-menu>
               <q-list style="min-width: 100px">
+                <q-item clickable v-close-popup @click="toggleFilter">
+                  <q-item-section>Filter</q-item-section>
+                </q-item>
+                <q-separator />
                 <q-item clickable v-close-popup @click="showNotif">
                   <q-item-section>New</q-item-section>
                 </q-item>
-                <q-separator />
                 <q-item clickable v-close-popup @click="showNotif">
                   <q-item-section>Delete</q-item-section>
                 </q-item>
@@ -152,7 +155,8 @@ export default {
   name: "Index",
   data() {
     return {
-      value: true,
+      showFilter: false,
+      isTableEditable: true,
       model: null,
       options: stringOptions,
       loading: true,
@@ -330,6 +334,12 @@ export default {
         message: "Deleted",
         color: "blue"
       });
+    },
+    toggleFilter() {
+      this.showFilter = !this.showFilter
+    },
+    toggleEdit() {
+      this.isTableEditable = !this.isTableEditable
     }
   },
   mounted() {
