@@ -29,12 +29,13 @@
             div.col.q-ml-md
               q-option-group(
                 v-model="group"
-                :options="options"
+                :options="groupOptions"
                 color="primary"
                 type="checkbox")
+                q-space
               q-option-group(
                 v-model="group"
-                :options="options"
+                :options="groupOptions"
                 color="primary"
                 type="toggle")
       q-separator(spaced)
@@ -50,34 +51,97 @@
               q-icon(name="star" color="red" size="24px")
 
         div.q-pa-md
-          div.row__q-col-gutter-xl
-            div.col__q-ml-md
-              q-input(
-                dense
-                v-model="name"
-                label="Your name *"
-                hint="Name and surname"
-                lazy-rules
-                :rules="[ val => val && val.length > 0 || 'Please type something']")
-
-              q-input(
-                dense
-                type="number"
-                v-model="age"
-                label="Your age *"
-                lazy-rules
-                :rules="[val => val !== null && val !== '' || 'Please type your age',val => val > 0 && val < 100 || 'Please type a real age']")
+          div.row.q-col-gutter-xl
+            div.col.q-ml-md
+              q-select(
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                label="Sales Order Nos."
+                @filter="filterFn"
+                :options-dense="true")
+              q-select(
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                @filter="filterFn"
+                :options-dense="true")
+              q-select(
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                @filter="filterFn"
+                :options-dense="true")
+              q-select(
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                @filter="filterFn"
+                :options-dense="true")
+            div.col.q-ml-md
+              q-select(
+                borderless
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                @filter="filterFn")
+              q-select(
+                borderless
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                @filter="filterFn")
+              q-select(
+                borderless
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                @filter="filterFn")
+              q-select(
+                borderless
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                @filter="filterFn")
 </template>
 
 <script>
+const stringOptions = ["Google", "Facebook", "Twitter", "Apple", "Oracle"];
+
 export default {
   data() {
     return {
       name: null,
       age: null,
       accept: false,
+      options: stringOptions,
+      model: null,
       group: ['op1'],
-      options: [
+      groupOptions: [
         {
           label: 'Option 1',
           value: 'op1'
@@ -116,7 +180,16 @@ export default {
       this.name = null;
       this.age = null;
       this.accept = false;
-    }
+    },
+    
+    filterFn(val, update, abort) {
+      update(() => {
+        const needle = val.toLowerCase();
+        this.options = stringOptions.filter(
+          v => v.toLowerCase().indexOf(needle) > -1
+        );
+      });
+    },
   }
 };
 </script>
