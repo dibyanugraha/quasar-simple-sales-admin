@@ -2,22 +2,26 @@
   <q-layout view="hHh Lpr lff">
     <q-header>
       <q-toolbar>
-          <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-          <q-toolbar-title>Header</q-toolbar-title>
-        </q-toolbar>
+        <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
+        <div class="q-pa-md">
+          <q-breadcrumbs active-color="white" style="font-size: 16px">
+            <q-breadcrumbs-el label="Home" icon="home" />
+            <q-breadcrumbs-el label="Components" icon="widgets" />
+            <q-breadcrumbs-el label="Breadcrumbs" />
+          </q-breadcrumbs>
+        </div>
+      </q-toolbar>
     </q-header>
 
     <q-drawer
-        v-model="drawer"
-
-        :mini="!drawer || miniState"
-        @click.capture="drawerClick"
-
-        :width="200"
-        :breakpoint="500"
-        show-if-above
-        bordered
-        content-class="bg-grey-3"
+      v-model="drawer"
+      :mini="!drawer || miniState"
+      @click.capture="drawerClick"
+      :width="200"
+      :breakpoint="500"
+      show-if-above
+      bordered
+      content-class="bg-grey-3"
     >
       <template v-slot:mini>
         <q-scroll-area class="fit mini-slot cursor-pointer">
@@ -63,14 +67,6 @@
     </q-drawer>
 
     <q-page-container>
-      
-    <div class="q-pa-md">
-      <q-breadcrumbs>
-        <q-breadcrumbs-el label="Home" icon="home" />
-        <q-breadcrumbs-el label="Components" icon="widgets" />
-        <q-breadcrumbs-el label="Breadcrumbs" />
-      </q-breadcrumbs>
-    </div>
       <router-view />
     </q-page-container>
     <div class="q-pa-md">
