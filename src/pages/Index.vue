@@ -83,18 +83,30 @@
           flat
         >
           <template v-slot:top-right>
-            <q-toggle color="blue" v-model="isTableEditable" />
+            <q-btn-dropdown split class="glossy" color="teal" label="Refresh" @click="onMainClick">
+              <q-list>
+                <q-item clickable v-close-popup @click="toggleFilter">
+                  <q-item-section avatar>
+                    <q-avatar icon="folder" color="primary" text-color="white" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label>Show Filters</q-item-label>
+                    <q-item-label caption>Show table filters</q-item-label>
+                  </q-item-section>
+                  <q-item-section side>
+                    <q-icon name="info" color="amber" />
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
           </template>
           <template v-slot:body="props">
             <q-menu touch-position context-menu>
               <q-list style="min-width: 100px">
-                <q-item clickable v-close-popup @click="toggleFilter">
-                  <q-item-section>Filter</q-item-section>
-                </q-item>
-                <q-separator />
                 <q-item clickable v-close-popup @click="showNotif">
                   <q-item-section>New</q-item-section>
                 </q-item>
+                <q-separator />
                 <q-item clickable v-close-popup @click="showNotif">
                   <q-item-section>Delete</q-item-section>
                 </q-item>
@@ -336,10 +348,17 @@ export default {
       });
     },
     toggleFilter() {
-      this.showFilter = !this.showFilter
+      this.showFilter = !this.showFilter;
     },
     toggleEdit() {
-      this.isTableEditable = !this.isTableEditable
+      this.isTableEditable = !this.isTableEditable;
+    },
+    onMainClick () {
+      console.log('Clicked on main button')
+    },
+
+    onItemClick () {
+      console.log('Clicked on an Item')
     }
   },
   mounted() {

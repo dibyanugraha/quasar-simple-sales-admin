@@ -34,6 +34,7 @@ module.exports = function (ctx) {
 
       components: [
         'QLayout',
+        'QBtnDropdown',
         'QHeader',
         'QDrawer',
         'QPageContainer',
