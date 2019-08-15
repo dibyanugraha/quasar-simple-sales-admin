@@ -8,81 +8,25 @@
             icon="explore"
             label="Filters"
             default-opened
-            header-class="text-primary"
-          >
+            header-class="text-primary">
             <q-card>
               <q-card-section>
-                <q-input
-                  outlined
-                  bottom-slots
-                  v-model="text"
-                  label="Label"
-                  counter
-                  maxlength="12"
-                  :dense="dense"
-                >
+                <q-input outlined clearable dense label="Label" clear-icon="close" v-model="text">
                   <template v-slot:before>
-                    <q-avatar>
-                      <img src="https://cdn.quasar.dev/img/avatar5.jpg" />
-                    </q-avatar>
-                  </template>
-
-                  <template v-slot:append>
-                    <q-icon
-                      v-if="text !== ''"
-                      name="close"
-                      @click="text = ''"
-                      class="cursor-pointer"
-                    />
-                    <q-icon name="schedule" />
-                  </template>
-
-                  <template v-slot:hint>Field hint</template>
-
-                  <template v-slot:after>
-                    <q-btn round dense flat icon="send" />
+                    <q-icon name="delete" class="cursor-pointer" />
                   </template>
                 </q-input>
-
-                <q-btn label="Add" />
               </q-card-section>
-            </q-card>
-          </q-expansion-item>
 
-          <q-separator />
-
-          <q-expansion-item
-            group="group01"
-            icon="perm_identity"
-            label="Second"
-            header-class="text-teal"
-          >
-            <q-card>
               <q-card-section>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-                eveniet doloribus ullam aliquid.
+                <q-input clearable outlined dense label="Label" clear-icon="close" v-model="text">
+                  <template v-slot:before>
+                    <q-icon name="delete" class="cursor-pointer" />
+                  </template>
+                </q-input>
               </q-card-section>
             </q-card>
           </q-expansion-item>
-
-          <q-separator />
-
-          <q-expansion-item
-            group="group01"
-            icon="shopping_cart"
-            label="Third"
-            header-class="text-purple"
-          >
-            <q-card>
-              <q-card-section>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-                eveniet doloribus ullam aliquid.
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
-
           <q-separator />
 
           <q-expansion-item
@@ -90,13 +34,10 @@
             icon="bluetooth"
             label="Fourth"
             header-class="bg-teal text-white"
-            expand-icon-class="text-white"
-          >
+            expand-icon-class="text-white">
             <q-card class="bg-teal-2">
               <q-card-section>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-                eveniet doloribus ullam aliquid.
+                Lorem ipsum dolor sit amet
               </q-card-section>
             </q-card>
           </q-expansion-item>
@@ -203,6 +144,7 @@ export default {
       options: stringOptions,
       loading: true,
       selected: [],
+      text: "",
       columns: [
         {
           name: "desc",

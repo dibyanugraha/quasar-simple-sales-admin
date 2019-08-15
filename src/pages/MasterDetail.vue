@@ -1,86 +1,103 @@
 <template>
   <div class="q-pa-md">
-      <q-expansion-item>
-        <template v-slot:header>
-          <q-item-section avatar>
-            <q-avatar icon="bluetooth" color="primary" text-color="white" />
-          </q-item-section>
-
-          <q-item-section>Bluetooth technology</q-item-section>
-
-          <q-item-section side>
-            <div class="row items-center">
-              <q-icon name="star" color="red" size="24px" />
-              <q-icon name="star" color="red" size="24px" />
-              <q-icon name="star" color="red" size="24px" />
-            </div>
-          </q-item-section>
+    <div class="q-pa-md q-gutter-sm">
+      <q-banner inline-actions rounded class="bg-orange text-white">
+        You have lost connection to the internet. This app is offline.
+        <template v-slot:action>
+          <q-btn flat label="Turn ON Wifi" />
+          <q-btn flat label="Dismiss" />
         </template>
+      </q-banner>
+    </div>
+    <q-expansion-item default-opened group="group01">
+      <template v-slot:header>
+        <q-item-section avatar>
+          <q-avatar icon="web_asset" color="primary" text-color="white" />
+        </q-item-section>
 
-        <div class="q-pa-md">
-          <q-form @submit="onSubmit" @reset="onReset">
-            <div class="row q-col-gutter-xl">
-              <div class="col q-ml-md">
-                <q-input
-                  dense
-                  v-model="name"
-                  label="Your name *"
-                  hint="Name and surname"
-                  lazy-rules
-                  :rules="[ val => val && val.length > 0 || 'Please type something']"/>
+        <q-item-section>General</q-item-section>
 
-                <q-input
-                  dense
-                  type="number"
-                  v-model="age"
-                  label="Your age *"
-                  lazy-rules
-                  :rules="[val => val !== null && val !== '' || 'Please type your age', val => val > 0 && val < 100 || 'Please type a real age']"/>
-              </div>
+        <q-item-section side>
+          <div class="row items-center">{{ importantFields }}</div>
+        </q-item-section>
+      </template>
 
-              <div class="col q-mr-md">
-                <q-input
-                  dense
-                  v-model="name"
-                  label="Your name *"
-                  hint="Name and surname"
-                  lazy-rules
-                  :rules="[ val => val && val.length > 0 || 'Please type something']"/>
-
-                <q-input
-                  dense
-                  type="number"
-                  v-model="age"
-                  label="Your age *"
-                  lazy-rules
-                  :rules="[val => val !== null && val !== '' || 'Please type your age', val => val > 0 && val < 100 || 'Please type a real age']"/>
-              </div>
+      <div class="q-pa-md">
+        <q-form @submit="onSubmit" @reset="onReset">
+          <div class="row q-col-gutter-xl">
+            <div class="col q-ml-md">
+              <q-input v-model="name" label="Your name *" />
+              <q-input v-model="age" label="Your age *" />
             </div>
 
-            <div>
-              <q-btn label="Submit" type="submit" color="primary" />
-              <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+            <div class="col q-col-gutter-y-md">
+              <q-input v-model="name" label="Your name *" />
+              <q-toggle v-model="toggleTest" label="On Right" />
             </div>
-          </q-form>
+          </div>
+        </q-form>
+      </div>
+    </q-expansion-item>
+    <q-separator spaced />
+    <q-expansion-item group="group02">
+      <template v-slot:header>
+        <q-item-section avatar>
+          <q-avatar icon="list" color="primary" text-color="white" />
+        </q-item-section>
+
+        <q-item-section>Lines</q-item-section>
+
+        <q-item-section side>
+          <div class="row items-center">
+            <div>10 lines</div>
+          </div>
+        </q-item-section>
+      </template>
+
+      <div class="row q-col-gutter-md">
+        <div class="col-6 col-md-2" v-if="showFilter">
+          <q-list bordered>
+            <q-expansion-item
+              group="group01"
+              icon="explore"
+              label="Filters"
+              default-opened
+              header-class="text-primary"
+            >
+              <q-card>
+                <q-card-section>
+                  <q-input outlined clearable dense label="Label" clear-icon="close" v-model="text">
+                    <template v-slot:before>
+                      <q-icon name="delete" class="cursor-pointer" />
+                    </template>
+                  </q-input>
+                </q-card-section>
+
+                <q-card-section>
+                  <q-input clearable outlined dense label="Label" clear-icon="close" v-model="text">
+                    <template v-slot:before>
+                      <q-icon name="delete" class="cursor-pointer" />
+                    </template>
+                  </q-input>
+                </q-card-section>
+              </q-card>
+            </q-expansion-item>
+            <q-separator />
+
+            <q-expansion-item
+              group="group01"
+              icon="bluetooth"
+              label="Fourth"
+              header-class="bg-teal text-white"
+              expand-icon-class="text-white"
+            >
+              <q-card class="bg-teal-2">
+                <q-card-section>Lorem ipsum dolor sit amet</q-card-section>
+              </q-card>
+            </q-expansion-item>
+          </q-list>
         </div>
-      </q-expansion-item>
-      <q-separator spaced />
-      <q-expansion-item>
-        <template v-slot:header>
-          <q-item-section avatar>
-            <q-avatar icon="bluetooth" color="primary" text-color="white" />
-          </q-item-section>
-
-          <q-item-section>Bluetooth technology</q-item-section>
-
-          <q-item-section side>
-            <div class="row items-center">
-              <q-icon name="star" color="red" size="24px" />
-              <q-icon name="star" color="red" size="24px" />
-              <q-icon name="star" color="red" size="24px" />
-            </div>
-          </q-item-section>
-        </template>
+        <div class="col col-md">
           <q-table
             :data="data"
             :columns="columns"
@@ -89,14 +106,38 @@
             :selected.sync="selected"
             flat
           >
+            <template v-slot:top-left>
+              <q-btn-dropdown
+                split
+                class="glossy"
+                color="teal"
+                label="Refresh"
+                @click="onMainClick"
+              >
+                <q-list>
+                  <q-item clickable v-close-popup @click="toggleFilter">
+                    <q-item-section avatar>
+                      <q-avatar icon="folder" color="primary" text-color="white" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>Show Filters</q-item-label>
+                      <q-item-label caption>Show table filters</q-item-label>
+                    </q-item-section>
+                    <q-item-section side>
+                      <q-icon name="info" color="amber" />
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-btn-dropdown>
+            </template>
             <template v-slot:body="props">
               <q-menu touch-position context-menu>
                 <q-list style="min-width: 100px">
-                  <q-item clickable v-close-popup>
+                  <q-item clickable v-close-popup @click="showNotif">
                     <q-item-section>New</q-item-section>
                   </q-item>
                   <q-separator />
-                  <q-item clickable v-close-popup>
+                  <q-item clickable v-close-popup @click="showNotif">
                     <q-item-section>Delete</q-item-section>
                   </q-item>
                 </q-list>
@@ -131,7 +172,6 @@
                     mask="#.##"
                     input-class="text-right"
                     fill-mask="0"
-                    reverse-fill-mask
                   />
                 </q-td>
                 <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
@@ -145,7 +185,9 @@
               </q-tr>
             </template>
           </q-table>
-      </q-expansion-item>
+        </div>
+      </div>
+    </q-expansion-item>
   </div>
 </template>
 
@@ -162,6 +204,10 @@ export default {
       options: stringOptions,
       loading: true,
       selected: [],
+      showFilter: false,
+      importantFields: ["field01", "field02"],
+      text: "",
+      toggleTest: false,
       columns: [
         {
           name: "desc",
@@ -354,6 +400,23 @@ export default {
         this.options = stringOptions.filter(
           v => v.toLowerCase().indexOf(needle) > -1
         );
+      });
+    },
+
+    toggleFilter() {
+      this.showFilter = !this.showFilter;
+    },
+    onMainClick() {
+      console.log("Clicked on main button");
+    },
+
+    onItemClick() {
+      console.log("Clicked on an Item");
+    },
+    showNotif() {
+      this.$q.notify({
+        message: "Deleted",
+        color: "blue"
       });
     }
   }
