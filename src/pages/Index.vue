@@ -6,15 +6,45 @@
           <q-expansion-item
             group="group01"
             icon="explore"
-            label="First"
+            label="Filters"
             default-opened
             header-class="text-primary"
           >
             <q-card>
               <q-card-section>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem, eius reprehenderit eos corrupti
-                commodi magni quaerat ex numquam, dolorum officiis modi facere maiores architecto suscipit iste
-                eveniet doloribus ullam aliquid.
+                <q-input
+                  outlined
+                  bottom-slots
+                  v-model="text"
+                  label="Label"
+                  counter
+                  maxlength="12"
+                  :dense="dense"
+                >
+                  <template v-slot:before>
+                    <q-avatar>
+                      <img src="https://cdn.quasar.dev/img/avatar5.jpg" />
+                    </q-avatar>
+                  </template>
+
+                  <template v-slot:append>
+                    <q-icon
+                      v-if="text !== ''"
+                      name="close"
+                      @click="text = ''"
+                      class="cursor-pointer"
+                    />
+                    <q-icon name="schedule" />
+                  </template>
+
+                  <template v-slot:hint>Field hint</template>
+
+                  <template v-slot:after>
+                    <q-btn round dense flat icon="send" />
+                  </template>
+                </q-input>
+
+                <q-btn label="Add" />
               </q-card-section>
             </q-card>
           </q-expansion-item>
@@ -353,12 +383,12 @@ export default {
     toggleEdit() {
       this.isTableEditable = !this.isTableEditable;
     },
-    onMainClick () {
-      console.log('Clicked on main button')
+    onMainClick() {
+      console.log("Clicked on main button");
     },
 
-    onItemClick () {
-      console.log('Clicked on an Item')
+    onItemClick() {
+      console.log("Clicked on an Item");
     }
   },
   mounted() {
