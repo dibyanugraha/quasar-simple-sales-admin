@@ -1,136 +1,96 @@
 <template>
   <div class="q-pa-md">
-    <div class="row q-col-gutter-md">
-      <div class="col-6 col-md-2" v-if="showFilter">
-        <q-list bordered>
-          <q-expansion-item
-            group="group01"
-            label="Filters"
-            default-opened
-            header-class="text-primary">
-            <q-card>
-              <q-card-section dense >
-                <q-input outlined clearable dense label="Field 01" clear-icon="close" v-model="text">
-                  <template v-slot:before>
-                    <q-btn flat round dense color="primary" icon="delete" @click="showNotif('Delete clicked')"/>
-                  </template>
-                </q-input>
-              </q-card-section>
-
-              <q-card-section dense >
-                <q-input clearable outlined dense label="Field 02" clear-icon="close" v-model="text">
-                  <template v-slot:before>
-                   <q-btn flat round dense color="primary" icon="delete" @click="showNotif('Delete clicked')"/>
-                  </template>
-                </q-input>
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
-          <q-separator />
-
-          <q-expansion-item
-            group="group01"
-            icon="bluetooth"
-            label="Fourth"
-            header-class="bg-teal text-white"
-            expand-icon-class="text-white">
-            <q-card class="bg-teal-2">
-              <q-card-section>
-                Lorem ipsum dolor sit amet
-              </q-card-section>
-            </q-card>
-          </q-expansion-item>
-        </q-list>
-      </div>
-      <div class="col col-md">
-        <q-table
-          title="Treats"
-          :data="data"
-          :columns="columns"
-          row-key="name"
-          selection="multiple"
-          :selected.sync="selected"
-          flat
-        >
-          <template v-slot:top-right>
-            <q-btn-dropdown split class="glossy" color="teal" label="Refresh" @click="onMainClick">
-              <q-list>
-                <q-item clickable v-close-popup @click="toggleFilter">
-                  <q-item-section avatar>
-                    <q-avatar icon="folder" color="primary" text-color="white" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>Show Filters</q-item-label>
-                    <q-item-label caption>Show table filters</q-item-label>
-                  </q-item-section>
-                  <q-item-section side>
-                    <q-icon name="info" color="amber" />
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-btn-dropdown>
-          </template>
-          <template v-slot:body="props">
-            <q-menu touch-position context-menu>
-              <q-list style="min-width: 100px">
-                <q-item clickable v-close-popup @click="showNotif('New item is clicked')">
-                  <q-item-section>New</q-item-section>
-                </q-item>
-                <q-separator />
-                <q-item clickable v-close-popup @click="showNotif('Deleted item is clicked')">
-                  <q-item-section>Delete</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-            <q-tr :props="props">
-              <q-td auto-width>
-                <q-checkbox class="q-pl-auto" v-model="props.selected"></q-checkbox>
-              </q-td>
-              <q-td key="desc" :props="props">
-                <q-select
-                  borderless
-                  v-model="model"
-                  use-input
-                  hide-selected
-                  fill-input
-                  input-debounce="0"
-                  :options="options"
-                  @filter="filterFn"
-                >
-                  <template v-slot:no-option>
-                    <q-item>
-                      <q-item-section class="text-grey">No results</q-item-section>
-                    </q-item>
-                  </template>
-                </q-select>
-              </q-td>
-              <q-td key="calories" :props="props">
-                <q-input
-                  borderless
-                  type="text"
-                  v-model="props.row.calories"
-                  mask="#.##"
-                  input-class="text-right"
-                  fill-mask="0"
-                />
-              </q-td>
-              <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
-              <q-td key="carbs" :props="props">{{ props.row.carbs }}</q-td>
-              <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
-              <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
-              <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
-              <q-td key="iron" :props="props">
-                <q-badge square color="amber">{{ props.row.iron }}</q-badge>
-              </q-td>
-            </q-tr>
-          </template>
-        </q-table>
-      </div>
+    <TableFilter />
+    <div class="col col-md">
+      <q-table
+        title="Treats"
+        :data="data"
+        :columns="columns"
+        row-key="name"
+        selection="multiple"
+        :selected.sync="selected"
+        flat
+      >
+        <template v-slot:top-right>
+          <q-btn-dropdown split class="glossy" color="teal" label="Refresh" @click="onMainClick">
+            <q-list>
+              <q-item clickable v-close-popup @click="toggleFilter">
+                <q-item-section avatar>
+                  <q-avatar icon="folder" color="primary" text-color="white" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>Show Filters</q-item-label>
+                  <q-item-label caption>Show table filters</q-item-label>
+                </q-item-section>
+                <q-item-section side>
+                  <q-icon name="info" color="amber" />
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-btn-dropdown>
+        </template>
+        <template v-slot:body="props">
+          <q-menu touch-position context-menu>
+            <q-list style="min-width: 100px">
+              <q-item clickable v-close-popup @click="showNotif('New item is clicked')">
+                <q-item-section>New</q-item-section>
+              </q-item>
+              <q-separator />
+              <q-item clickable v-close-popup @click="showNotif('Deleted item is clicked')">
+                <q-item-section>Delete</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+          <q-tr :props="props">
+            <q-td auto-width>
+              <q-checkbox class="q-pl-auto" v-model="props.selected"></q-checkbox>
+            </q-td>
+            <q-td key="desc" :props="props">
+              <q-select
+                borderless
+                v-model="model"
+                use-input
+                hide-selected
+                fill-input
+                input-debounce="0"
+                :options="options"
+                @filter="filterFn"
+              >
+                <template v-slot:no-option>
+                  <q-item>
+                    <q-item-section class="text-grey">No results</q-item-section>
+                  </q-item>
+                </template>
+              </q-select>
+            </q-td>
+            <q-td key="calories" :props="props">
+              <q-input
+                borderless
+                type="text"
+                v-model="props.row.calories"
+                mask="#.##"
+                input-class="text-right"
+                fill-mask="0"
+              />
+            </q-td>
+            <q-td key="fat" :props="props">{{ props.row.fat }}</q-td>
+            <q-td key="carbs" :props="props">{{ props.row.carbs }}</q-td>
+            <q-td key="protein" :props="props">{{ props.row.protein }}</q-td>
+            <q-td key="sodium" :props="props">{{ props.row.sodium }}</q-td>
+            <q-td key="calcium" :props="props">{{ props.row.calcium }}</q-td>
+            <q-td key="iron" :props="props">
+              <q-badge square color="amber">{{ props.row.iron }}</q-badge>
+            </q-td>
+          </q-tr>
+        </template>
+      </q-table>
     </div>
   </div>
 </template>
 
 <script>
+import TableFilter from "components/Filter/TableFilter.vue";
+
 const stringOptions = ["Google", "Facebook", "Twitter", "Apple", "Oracle"];
 
 export default {
@@ -334,6 +294,9 @@ export default {
   },
   mounted() {
     this.onRefresh();
+  },
+  components: {
+    TableFilter
   }
 };
 </script>
