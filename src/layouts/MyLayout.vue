@@ -5,9 +5,9 @@
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
         <div class="q-pa-md">
           <q-breadcrumbs active-color="white" style="font-size: 16px">
-            <q-breadcrumbs-el label="Home" icon="home" />
-            <q-breadcrumbs-el label="Components" icon="widgets" />
-            <q-breadcrumbs-el label="Breadcrumbs" />
+            <q-breadcrumbs-el label="Home" icon="home" to="/" />
+            <q-breadcrumbs-el label="Sales" icon="widgets" />
+            <q-breadcrumbs-el label="Sales Order" />
           </q-breadcrumbs>
         </div>
       </q-toolbar>

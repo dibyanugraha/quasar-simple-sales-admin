@@ -5,23 +5,22 @@
         <q-list bordered>
           <q-expansion-item
             group="group01"
-            icon="explore"
             label="Filters"
             default-opened
             header-class="text-primary">
             <q-card>
-              <q-card-section>
-                <q-input outlined clearable dense label="Label" clear-icon="close" v-model="text">
+              <q-card-section dense >
+                <q-input outlined clearable dense label="Field 01" clear-icon="close" v-model="text">
                   <template v-slot:before>
-                    <q-icon name="delete" class="cursor-pointer" />
+                    <q-btn flat round dense color="primary" icon="delete" @click="showNotif('Delete clicked')"/>
                   </template>
                 </q-input>
               </q-card-section>
 
-              <q-card-section>
-                <q-input clearable outlined dense label="Label" clear-icon="close" v-model="text">
+              <q-card-section dense >
+                <q-input clearable outlined dense label="Field 02" clear-icon="close" v-model="text">
                   <template v-slot:before>
-                    <q-icon name="delete" class="cursor-pointer" />
+                   <q-btn flat round dense color="primary" icon="delete" @click="showNotif('Delete clicked')"/>
                   </template>
                 </q-input>
               </q-card-section>
@@ -74,11 +73,11 @@
           <template v-slot:body="props">
             <q-menu touch-position context-menu>
               <q-list style="min-width: 100px">
-                <q-item clickable v-close-popup @click="showNotif">
+                <q-item clickable v-close-popup @click="showNotif('New item is clicked')">
                   <q-item-section>New</q-item-section>
                 </q-item>
                 <q-separator />
-                <q-item clickable v-close-popup @click="showNotif">
+                <q-item clickable v-close-popup @click="showNotif('Deleted item is clicked')">
                   <q-item-section>Delete</q-item-section>
                 </q-item>
               </q-list>
@@ -313,9 +312,9 @@ export default {
         );
       });
     },
-    showNotif() {
+    showNotif(message) {
       this.$q.notify({
-        message: "Deleted",
+        message: message,
         color: "blue"
       });
     },
