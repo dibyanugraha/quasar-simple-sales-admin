@@ -2,9 +2,10 @@
   <div class="col-6 col-md-2">
     <q-list bordered v-if="showFilter">
       <q-expansion-item group="group01" label="Filters" default-opened header-class="text-primary">
-        <q-card v-for="fieldFilter in fieldFilters" :key="fieldFilter.fieldName">
+        <q-card v-for="(fieldFilter, fieldKey) in componentFilters" 
+          :key="fieldKey">
           <q-card-section dense>
-            <q-input outlined clearable dense v-model="fieldFilter.fieldName" readonly="fieldFilter.readonly" clear-icon="close">
+            <q-input outlined clearable dense readonly="fieldFilter.readonly" clear-icon="close">
               <template v-slot:after>
                 <q-btn
                   flat
@@ -27,26 +28,15 @@
 </template>
 
 <script>
-export default {
-  name: "TableFilter",
-  data() {
-    return {
-      showFilter: false,
-      fieldFilters: [
-          {
-              fieldName: "Field01",
-              readonly: false
-          },
-          {
-              fieldName: "Field02",
-              readonly: false
-          },
-          {
-              fieldName: "Field03",
-              readonly: true
-          }
-      ]
+  export default {
+    name: "table-filter",
+    props: [
+      'componentFilters'
+    ],
+    data() {
+      return {
+        showFilter: false,
+      }
     }
   }
-}
 </script>

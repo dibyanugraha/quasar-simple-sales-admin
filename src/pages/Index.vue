@@ -1,6 +1,7 @@
 <template>
   <div class="q-pa-md">
-    <TableFilter />
+    <tableFilter 
+      :componentFilters="getTableFilters"/>
     <div class="col col-md">
       <q-table
         title="Treats"
@@ -89,7 +90,8 @@
 </template>
 
 <script>
-import TableFilter from "components/Filter/TableFilter.vue";
+import { mapGetters } from 'vuex'
+import tableFilter from "components/filters/table-filter";
 
 const stringOptions = ["Google", "Facebook", "Twitter", "Apple", "Oracle"];
 
@@ -296,7 +298,10 @@ export default {
     this.onRefresh();
   },
   components: {
-    TableFilter
+    tableFilter
+  },
+  computed: {
+    ...mapGetters('getTableFilters', ['storeTableFilter'])
   }
 };
 </script>
