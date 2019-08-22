@@ -1,9 +1,8 @@
 <template>
-  <div class="col-6 col-md-2">
-    <q-list bordered v-if="showFilter">
+    <q-list bordered v-if="true">
       <q-expansion-item group="group01" label="Filters" default-opened header-class="text-primary">
-        <q-card v-for="(fieldFilter, fieldKey) in componentFilters" 
-          :key="fieldKey">
+        <q-card v-for="(fieldFilter, key) in componentFilters" 
+          :key="key">
           <q-card-section dense>
             <q-input outlined clearable dense readonly="fieldFilter.readonly" clear-icon="close">
               <template v-slot:after>
@@ -24,7 +23,6 @@
         </q-card>
       </q-expansion-item>
     </q-list>
-  </div>
 </template>
 
 <script>
