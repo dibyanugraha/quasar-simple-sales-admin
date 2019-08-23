@@ -1,8 +1,10 @@
 <template>
   <div class="q-pa-md">
-    <div class="col-6 col-md-2">
-      <tableFilter :componentFilters="getTableFilters" />
-      <div class="col col-md">
+    <div class="row q-col-gutter-md">
+      <div class="col-2" v-if="showFilter">
+        <tableFilter :componentFilters="getTableFilters" />
+      </div>
+      <div class="col">
         <q-table
           title="Treats"
           :data="data"
@@ -302,7 +304,7 @@ export default {
     tableFilter
   },
   computed: {
-    ...mapGetters('storeTableFilter', ['getTableFilters'])
+    ...mapGetters("storeTableFilter", ["getTableFilters"])
   }
 };
 </script>
