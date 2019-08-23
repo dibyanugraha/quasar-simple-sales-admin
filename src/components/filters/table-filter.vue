@@ -26,7 +26,7 @@
                 dense
                 color="primary"
                 icon="delete"
-                @click="deleteFilter(fieldFilter.label)"
+                @click="deleteFilter(key)"
               />
             </template>
           </q-input>
@@ -34,7 +34,7 @@
       </q-card>
       <q-card>
         <q-card-section>
-          <q-btn unelevated color="primary" class="full-width" label="Add" />
+          <q-btn unelevated color="primary" class="full-width" label="Add" @click="addFilter"/>
         </q-card-section>
       </q-card>
     </q-expansion-item>
@@ -49,12 +49,17 @@ export default {
   props: ["componentFilters"],
   data() {
     return {
-      showFilter: false
+      showFilter: false,
     };
   },
+  computed: {
+  },
   methods: {
-    deleteFilter: function(event) {
-      console.log('deleted ' + event)
+    deleteFilter: function(index) {
+      delete(this.componentFilters[index])
+    },
+    addFilter: function() {
+      console.log('we will add new filter')
     }
   }
 };
