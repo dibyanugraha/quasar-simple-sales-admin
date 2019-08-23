@@ -2,7 +2,7 @@
   <q-list>
     <q-expansion-item
       class="shadow-1 overflow-hidden"
-      style="border-radius: 5px"
+      style="border-radius: 3px"
       group="group01"
       label="Filters"
       default-opened
@@ -26,7 +26,7 @@
                 dense
                 color="primary"
                 icon="delete"
-                @click="console.log('delete clicked')"
+                @click="deleteFilter(fieldFilter.label)"
               />
             </template>
           </q-input>
@@ -51,6 +51,11 @@ export default {
     return {
       showFilter: false
     };
+  },
+  methods: {
+    deleteFilter: function(event) {
+      console.log('deleted ' + event)
+    }
   }
 };
 </script>
