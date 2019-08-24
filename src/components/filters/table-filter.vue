@@ -59,6 +59,11 @@
 <script>
 import Vue from "vue";
 import { mapActions } from "vuex";
+import _ from "lodash";
+
+const isSubset = (aSubSet, aSuperSet) => (
+  _.every(aSubSet, (val, key) => _.isEqual(val, aSuperSet[key]))
+);
 
 export default {
   name: "table-filter",
@@ -105,10 +110,13 @@ export default {
       this.isAddNewFilter = !this.isAddNewFilter;
     },
     validateAndAddNewFilter() {
-      console.log(this.newFilter.label);
-      console.log(this.newFilter.value);
       this.addFilter(this.newFilter);
-      this.$emit('close');
+      this.showHideAddNewFilter();
+      this.removeFilterOption(this.newFilter.label);
+    },
+    removeFilterOption(label) {
+      this.options.splice(label, 1);
+      this.newFilter = null;
     }
   }
 };
