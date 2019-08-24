@@ -38,8 +38,8 @@ const actions = {
     },
     addFilter( {commit}, filter) {
         let payload = {
-            label: filter.label,
-            readonly: filter.readonly
+            id: filter.value,
+            filter: filter
         };
         commit('ADD_FILTER', payload);
     }

@@ -32,9 +32,24 @@
           </q-input>
         </q-card-section>
       </q-card>
+      <q-card v-if="isAddNewFilter">
+        <q-card-section>
+          <q-select
+            v-model="newFilter"
+            outlined
+            dense
+            :options="options"     
+            @keyup.enter.native="validateAndAddNewFilter()"   
+          >
+            <template v-slot:after>
+              <q-btn round dense flat icon="close" @click.stop="showHideAddNewFilter" />
+            </template>
+          </q-select>
+        </q-card-section>
+      </q-card>
       <q-card>
         <q-card-section>
-          <q-btn unelevated color="primary" class="full-width" label="Add" @click="addFilter"/>
+          <q-btn unelevated color="primary" class="full-width" @click.stop="showHideAddNewFilter" icon="add" />
         </q-card-section>
       </q-card>
     </q-expansion-item>
@@ -43,7 +58,7 @@
 
 <script>
 import Vue from "vue";
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 
 export default {
   name: "table-filter",
@@ -51,17 +66,49 @@ export default {
   data() {
     return {
       showFilter: false,
+      isAddNewFilter: false,
+      newFilter: {
+        label: '',
+        value: ''
+      },
+      options: [
+        {
+          label: "Google",
+          value: "Google"
+        },
+        {
+          label: "Facebook",
+          value: "Facebook"
+        },
+        {
+          label: "Twitter",
+          value: "Twitter"
+        },
+        {
+          label: "Apple",
+          value: "Apple"
+        },
+        {
+          label: "Oracle",
+          value: "Oracle"
+        }
+      ]
     };
   },
-  computed: {
-  },
+  computed: {},
   methods: {
-    ...mapActions('storeTableFilter', ['updateFilter', 'deleteFilter']),
+    ...mapActions("storeTableFilter", ["addFilter", "deleteFilter"]),
     removeFilter: function(id) {
-      this.deleteFilter(id)
+      this.deleteFilter(id);
     },
-    addFilter: function() {
-      console.log('we will add new filter')
+    showHideAddNewFilter: function() {
+      this.isAddNewFilter = !this.isAddNewFilter;
+    },
+    validateAndAddNewFilter() {
+      console.log(this.newFilter.label);
+      console.log(this.newFilter.value);
+      this.addFilter(this.newFilter);
+      this.$emit('close');
     }
   }
 };
