@@ -26,7 +26,7 @@
                 dense
                 color="primary"
                 icon="delete"
-                @click="deleteFilter(key)"
+                @click.stop="removeFilter(key)"
               />
             </template>
           </q-input>
@@ -43,6 +43,7 @@
 
 <script>
 import Vue from "vue";
+import { mapActions } from 'vuex';
 
 export default {
   name: "table-filter",
@@ -55,8 +56,9 @@ export default {
   computed: {
   },
   methods: {
-    deleteFilter: function(index) {
-      delete(this.componentFilters[index])
+    ...mapActions('storeTableFilter', ['updateFilter', 'deleteFilter']),
+    removeFilter: function(id) {
+      this.deleteFilter(id)
     },
     addFilter: function() {
       console.log('we will add new filter')

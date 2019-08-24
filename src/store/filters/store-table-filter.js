@@ -1,3 +1,5 @@
+import Vue from 'vue';
+
 const state = {
     fieldFilters: {
         '1': {
@@ -16,11 +18,31 @@ const state = {
 };
 
 const mutations = {
-
+    UPDATE_FILTER(state, payload) {
+        Object.assign(state.fieldFilters[payload.id], payload.updates);
+    },
+    DELETE_FILTER(state, id) {
+        Vue.delete(state.fieldFilters, id);
+    },
+    ADD_FILTER(state, payload) {
+        Vue.set(state.fieldFilters, payload.id, payload.filter);
+    }
 };
 
 const actions = {
-
+    updateFilter( {commit}, payload) {
+        commit('UPDATE_FILTER', payload);
+    },
+    deleteFilter( {commit}, payload) {
+        commit('DELETE_FILTER', payload);
+    },
+    addFilter( {commit}, filter) {
+        let payload = {
+            label: filter.label,
+            readonly: filter.readonly
+        };
+        commit('ADD_FILTER', payload);
+    }
 };
 
 const getters = {
