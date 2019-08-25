@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div class="q-px-md">
     <div class="q-pa-md q-gutter-sm">
       <q-banner inline-actions rounded class="bg-orange text-white">
         You have lost connection to the internet. This app is offline.

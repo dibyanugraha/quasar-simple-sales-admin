@@ -1,5 +1,5 @@
 <template lang="pug">
-  div.q-pa-md
+  div.q-px-md
     q-toolbar.bg-primary.text-white.q-my-md.shadow-2
       q-btn-dropdown(stretch flat label="Dropdown")
         q-list
@@ -38,14 +38,13 @@
     q-form(@submit="onSubmit" @reset="onReset")
       q-expansion-item.shadow-2.overflow-hidden(default-opened header-class="bg-primary text-white" expand-icon-class="text-white")
         template(v-slot:header)
-          q-item-section General
+          q-item-section.q-px-md.text-weight-medium.text-subtitle1 General
         div.q-pa-md
           div.row.q-col-gutter-xl
             div.col.q-ml-md
               q-input(
                 v-model="name"
-                label="Your name *"
-                hint="Name and surname")
+                label="Your name *")
               q-input.text-right(
                 v-model="age"
                 label="Your age *")
@@ -59,26 +58,57 @@
                 use-input
                 hide-selected
                 fill-input
+                dense
                 :options="options"
                 label="Something"
                 @filter="filterFn"
                 :options-dense="true")
             div.col.q-ml-md
               q-list(padding)
-                q-item(tag="label" v-ripple)
+                q-item(v-ripple)
                   q-item-section
                     q-item-label Battery too low
                     q-item-label(caption) Allow notification
                   q-item-section(side)
                     q-toggle(color="blue" v-model="notif1" val="battery")
-            div.col.q-ml-md
-              q-list(padding)
-                q-item(tag="label" v-ripple)
+                q-item(v-ripple)
                   q-item-section
-                    q-item-label Battery too low
+                    q-item-label Test another one
                     q-item-label(caption) Allow notification
                   q-item-section(side)
-                    q-checkbox(color="blue" v-model="notif1" val="battery")
+                    q-toggle(color="red" v-model="notif1" val="battery")
+                q-item(v-ripple)
+                  q-item-section
+                    q-item-label Another two
+                    q-item-label(caption) Allow notification
+                  q-item-section(side)
+                    q-toggle(color="green" v-model="notif1" val="battery")
+                q-item(v-ripple)
+                  q-item-section
+                    q-item-label Another three
+                    q-item-label(caption) Allow notification
+                  q-item-section(side)
+                    q-toggle(color="yellow" v-model="notif1" val="battery")
+            div.col.q-ml-md
+              q-list(padding)
+                q-item(v-ripple)
+                  q-item-section
+                    q-item-label Check 01
+                    q-item-label(caption) Allow notification
+                  q-item-section(side)
+                    q-checkbox(color="blue" v-model="notif1")
+                q-item(v-ripple)
+                  q-item-section
+                    q-item-label Check 02
+                    q-item-label(caption) Allow notification
+                  q-item-section(side)
+                    q-checkbox(color="red" v-model="notif1")
+                q-item(v-ripple)
+                  q-item-section
+                    q-item-label Check 03
+                    q-item-label(caption) Allow notification
+                  q-item-section(side)
+                    q-checkbox(color="green" v-model="notif1")
                 q-item
                   q-item-section
                     q-item-label Threshold
@@ -89,12 +119,9 @@
                       :max="50"
                       label)
       q-separator(spaced)
-      q-expansion-item
+      q-expansion-item.shadow-2.overflow-hidden(header-class="bg-primary text-white" expand-icon-class="text-white")
         template(v-slot:header)
-          q-item-section(avatar)
-            q-avatar(icon="bluetooth" color="primary" text-color="white")
-          q-item-section Number Series
-          q-item-section(side v-for="label in testLabel" :key="label.label") {{ label.label }}
+          q-item-section.q-px-md.text-weight-medium.text-subtitle1 Number Series
         div.q-pa-md
           div.row.q-col-gutter-xl
             div.col.q-ml-md
@@ -220,20 +247,6 @@ export default {
           "label": "c"
         },
       ],
-      groupOptions: [
-        {
-          label: 'Option 1',
-          value: 'op1'
-        },
-        {
-          label: 'Option 2',
-          value: 'op2'
-        },
-        {
-          label: 'Option 3',
-          value: 'op3'
-        }
-      ]
     }
   },
   methods: {
