@@ -79,7 +79,10 @@ module.exports = function (ctx) {
         'QRouteTab',
         'QBanner',
         'QDate',
-        'QPopupProxy'
+        'QPopupProxy',
+        'QStepper',
+        'QStep',
+        'QStepperNavigation'
       ],
 
       directives: [

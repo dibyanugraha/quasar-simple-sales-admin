@@ -34,6 +34,13 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Auth.vue') }
     ]
+  },
+  {
+    path: '/wizard',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/SetupWizard.vue') }
+    ]
   }
 ]
 
@@ -45,4 +52,4 @@ if (process.env.MODE !== 'ssr') {
   })
 }
 
-export default routes
+export default routes;

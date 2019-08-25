@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 // import example from './module-example'
 import storeTableFilter from './filters/store-table-filter';
+import storeNavigation from './breadcrumbs/store-navigation';
 
 Vue.use(Vuex);
 
@@ -15,7 +16,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       // example
-      storeTableFilter
+      storeTableFilter,
+      storeNavigation
     },
 
     // enable strict mode (adds overhead!)

@@ -184,13 +184,6 @@
                 @filter="filterFn")
 </template>
 
-<style scoped>
-  .text-right{
-    text-align: right
-  }
-</style>
-
-
 <script>
 const stringOptions = ["Google", "Facebook", "Twitter", "Apple", "Oracle"];
 

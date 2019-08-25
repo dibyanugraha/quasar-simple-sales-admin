@@ -2,13 +2,16 @@
   <q-layout view="hHh Lpr lff">
     <q-header>
       <q-toolbar>
-        <q-btn class="q-mr-sm" flat @click="drawer = !drawer" round dense icon="menu" />
-        <q-separator dark vertical inset />
+        <q-btn class="q-mr-xs" flat @click="drawer = !drawer" dense round icon="menu" />
+        <q-separator dark vertical inset spaced />
         <div class="q-pa-md">
           <q-breadcrumbs active-color="white" style="font-size: 16px">
-            <q-breadcrumbs-el label="Home" icon="home" to="/" />
-            <q-breadcrumbs-el label="Sales" icon="widgets" />
-            <q-breadcrumbs-el label="Sales Order" />
+            <template v-slot:separator>
+              <q-icon size="1.5em" name="chevron_right" color="white"/>
+            </template>
+            <q-breadcrumbs-el label="Home" icon="home" to="/" exact-active-class="text-weight-bolder"/>
+            <q-breadcrumbs-el label="Sales" to="/document" exact-active-class="text-weight-bolder"/>
+            <q-breadcrumbs-el label="Sales Order" exact-active-class="text-weight-bolder"/>
           </q-breadcrumbs>
         </div>
       </q-toolbar>
@@ -28,10 +31,11 @@
         <q-scroll-area class="fit mini-slot cursor-pointer">
           <div class="q-py-lg">
             <div class="column items-center">
-              <q-icon name="inbox" color="blue" class="mini-icon"/>
-              <q-icon name="star" color="orange" class="mini-icon"/>
-              <q-icon name="send" color="purple" class="mini-icon"/>
-              <q-icon name="drafts" color="teal" class="mini-icon"/>
+              <q-icon name="inbox" color="blue" class="mini-icon" />
+              <q-icon name="star" color="orange" class="mini-icon" />
+              <q-icon name="send" color="purple" class="mini-icon" />
+              <q-icon name="drafts" color="teal" class="mini-icon" />
+              <q-icon name="home" color="red" class="mini-icon" />
             </div>
           </div>
         </q-scroll-area>
@@ -40,19 +44,23 @@
       <q-scroll-area class="fit">
         <q-list padding>
           <q-item clickable v-ripple to="/" exact>
-            <q-item-section>Inbox</q-item-section>
+            <q-item-section>List</q-item-section>
           </q-item>
 
           <q-item clickable v-ripple to="/document" exact>
-            <q-item-section>Star</q-item-section>
+            <q-item-section>Document</q-item-section>
           </q-item>
 
           <q-item clickable v-ripple to="/setup" exact>
-            <q-item-section>Send</q-item-section>
+            <q-item-section>Setup</q-item-section>
           </q-item>
 
           <q-item clickable v-ripple to="/auth" exact>
-            <q-item-section>Drafts</q-item-section>
+            <q-item-section>Authentication</q-item-section>
+          </q-item>
+          
+          <q-item clickable v-ripple to="/wizard" exact>
+            <q-item-section>Wizard</q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>
