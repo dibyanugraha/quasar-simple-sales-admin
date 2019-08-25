@@ -82,7 +82,8 @@ module.exports = function (ctx) {
         'QPopupProxy',
         'QStepper',
         'QStep',
-        'QStepperNavigation'
+        'QStepperNavigation',
+        'QSlider'
       ],
 
       directives: [

@@ -3,7 +3,7 @@
     <q-header>
       <q-toolbar>
         <q-btn class="q-mr-xs" flat @click="drawer = !drawer" dense round icon="menu" />
-        <q-separator dark vertical inset spaced />
+        <q-separator dark vertical spaced />
         <div class="q-pa-md">
           <q-breadcrumbs active-color="white" style="font-size: 16px">
             <template v-slot:separator>

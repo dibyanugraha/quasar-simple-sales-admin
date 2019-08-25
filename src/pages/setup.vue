@@ -36,12 +36,9 @@
       q-space
       q-btn(stretch flat label="Link")
     q-form(@submit="onSubmit" @reset="onReset")
-      q-expansion-item(default-opened)
+      q-expansion-item.shadow-2.overflow-hidden(default-opened header-class="bg-primary text-white" expand-icon-class="text-white")
         template(v-slot:header)
-          q-item-section(avatar)
-            q-avatar(icon="bluetooth" color="primary" text-color="white")
           q-item-section General
-          q-item-section(v-if="isCollapse" side v-for="label in testLabel") {{ label }}
         div.q-pa-md
           div.row.q-col-gutter-xl
             div.col.q-ml-md
@@ -57,18 +54,6 @@
                   q-icon(name="event" class="cursor-pointer")
                     q-popup-proxy(ref="qDateProxy" transition-show="scale" transition-hide="scale")
                       q-date(v-model="date" @input="() => $refs.qDateProxy.hide()")
-            div.col.q-ml-md
-              q-option-group(
-                v-model="group"
-                :options="groupOptions"
-                color="primary"
-                type="toggle")
-            div.col.q-ml-md
-              q-option-group(
-                v-model="group"
-                :options="groupOptions"
-                color="primary"
-                type="checkbox")
               q-select(
                 v-model="model"
                 use-input
@@ -78,13 +63,38 @@
                 label="Something"
                 @filter="filterFn"
                 :options-dense="true")
+            div.col.q-ml-md
+              q-list(padding)
+                q-item(tag="label" v-ripple)
+                  q-item-section
+                    q-item-label Battery too low
+                    q-item-label(caption) Allow notification
+                  q-item-section(side)
+                    q-toggle(color="blue" v-model="notif1" val="battery")
+            div.col.q-ml-md
+              q-list(padding)
+                q-item(tag="label" v-ripple)
+                  q-item-section
+                    q-item-label Battery too low
+                    q-item-label(caption) Allow notification
+                  q-item-section(side)
+                    q-checkbox(color="blue" v-model="notif1" val="battery")
+                q-item
+                  q-item-section
+                    q-item-label Threshold
+                    q-item-label(caption) {{ mic }}
+                  q-item-section
+                    q-slider(v-model="mic"
+                      :min="0"
+                      :max="50"
+                      label)
       q-separator(spaced)
       q-expansion-item
         template(v-slot:header)
           q-item-section(avatar)
             q-avatar(icon="bluetooth" color="primary" text-color="white")
           q-item-section Number Series
-          q-item-section(side v-for="label in testLabel") {{ label }}
+          q-item-section(side v-for="label in testLabel" :key="label.label") {{ label.label }}
         div.q-pa-md
           div.row.q-col-gutter-xl
             div.col.q-ml-md
@@ -195,10 +205,20 @@ export default {
       accept: false,
       options: stringOptions,
       model: null,
+      notif1: true,
+      mic: 8,
       date: "2019/08/14",
       group: ['op1'],
       testLabel: [
-        "a", "b", "c"
+        {
+          "label": "a"
+        },
+        {
+          "label": "b"
+        },
+        {
+          "label": "c"
+        },
       ],
       groupOptions: [
         {
