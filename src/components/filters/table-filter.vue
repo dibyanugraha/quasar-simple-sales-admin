@@ -108,6 +108,7 @@ export default {
     },
     showHideAddNewFilter: function() {
       this.isAddNewFilter = !this.isAddNewFilter;
+      this.newFilter = null;
     },
     validateAndAddNewFilter() {
       this.addFilter(this.newFilter);

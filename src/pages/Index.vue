@@ -13,6 +13,7 @@
           selection="multiple"
           :selected.sync="selected"
           flat
+          :filter="myFilterInput"
         >
           <template v-slot:top-right>
             <q-btn-dropdown split class="glossy" color="teal" label="Refresh" @click="onMainClick">
@@ -251,7 +252,8 @@ export default {
           calcium: "12%",
           iron: "6%"
         }
-      ]
+      ],
+      myFilterInput: ''
     };
   },
   methods: {
@@ -294,7 +296,11 @@ export default {
 
     onItemClick() {
       console.log("Clicked on an Item");
-    }
+    },
+    testFilter() {
+      debugger
+      [1], "87"
+    },
   },
   mounted() {
     this.onRefresh();

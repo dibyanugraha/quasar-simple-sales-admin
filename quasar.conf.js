@@ -57,7 +57,6 @@ module.exports = function (ctx) {
         'QBreadcrumbs',
         'QBreadcrumbsEl',
         'QSelect',
-        'QPopupEdit',
         'QInput',
         'QCarousel',
         'QCarouselControl',
@@ -78,7 +77,9 @@ module.exports = function (ctx) {
         'QTab',
         'QTabs',
         'QRouteTab',
-        'QBanner'
+        'QBanner',
+        'QDate',
+        'QPopupProxy'
       ],
 
       directives: [

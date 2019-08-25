@@ -2,7 +2,8 @@
   <q-layout view="hHh Lpr lff">
     <q-header>
       <q-toolbar>
-        <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
+        <q-btn class="q-mr-sm" flat @click="drawer = !drawer" round dense icon="menu" />
+        <q-separator dark vertical inset />
         <div class="q-pa-md">
           <q-breadcrumbs active-color="white" style="font-size: 16px">
             <q-breadcrumbs-el label="Home" icon="home" to="/" />
