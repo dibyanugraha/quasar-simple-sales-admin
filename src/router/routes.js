@@ -18,7 +18,7 @@ const routes = [
     path: '/document',
     component: () => import('layouts/MyLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/MasterDetail.vue') }
+      { path: '', component: () => import('pages/Document.vue') }
     ]
   },
   {

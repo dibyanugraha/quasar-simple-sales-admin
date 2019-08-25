@@ -2,10 +2,12 @@ import Vue from "vue";
 
 const state = {
   fieldFilters: {
-    // '1': {
-    //     readonly: false,
-    //     label: 'Field01'
-    // }
+    '1': {
+        readonly: false,
+        value: 'Field01',
+        label: 'Field01',
+        active: false
+    }
   }
 };
 
@@ -38,9 +40,18 @@ const actions = {
 };
 
 const getters = {
-  getTableFilters: state => {
-    return state.fieldFilters;
-  }
+  getActiveFilters: (state, getters) => {
+		let selectedFilters = getters.fieldFilters;
+		let activeFilters = {};
+		Object.keys(selectedFilters).forEach(function(key) {
+			let filter = selectedFilters[key];
+			if (filter.active) {
+				activeFilters[key] = filter;
+			}
+		});
+		return activeFilters;
+	}
+
 };
 
 export default {
