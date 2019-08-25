@@ -22,24 +22,25 @@
                 dense
                 color="primary"
                 icon="delete"
-                @click.stop="updateActiveFilters(fieldFilter, false)")
+                @click.stop="removeFilter(fieldFilter)")
       q-card(v-if="isAddNewFilter")
         q-card-section
           q-select(
             v-model="selectedFilter"
             outlined
             dense
-            :options="options"     
-            @keyup.enter.native="updateActiveFilters(this.selectedFilter, true)")
+            :options="getOptions()"
+            @keyup.enter.native="addOptionToFilter()")
             template(v-slot:after)
-              q-btn(round dense flat icon="close" @click.stop="showHideAddNewFilter")
+              q-btn(round dense flat icon="close" @click.stop="toggleAddNewFilter()")
         q-card-section
-          q-btn.full-width(unelevated color="primary" @click.stop="showHideAddNewFilter" icon="add")
+          q-btn.full-width(unelevated color="primary" @click.stop="toggleAddNewFilter()" icon="add")
 </template>
 
 <script>
 import Vue from "vue";
 import { mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
   name: "table-filter",
@@ -50,55 +51,54 @@ export default {
       selectedFilter: {
           label: "",
           value: "",
-          readonly: false,
-          active: false
+          show: true
           },
-      isAddNewFilter: false,
-      options: [
-        {
+      isAddNewFilter: true,
+      options: {
+        "Google" :{
           label: "Google",
           value: "Google",
-          readonly: false,
-          active: false
+          show: true
         },
-        {
+        "Facebook": {
           label: "Facebook",
           value: "Facebook",
-          readonly: false,
-          active: false
+          show: true
         },
-        {
+        "Twitter": {
           label: "Twitter",
           value: "Twitter",
-          readonly: false,
-          active: false
+          show: true
         },
-        {
+        "Apple": {
           label: "Apple",
           value: "Apple",
-          readonly: false,
-          active: false
-        },
-        {
-          label: "Oracle",
-          value: "Oracle",
-          readonly: false,
-          active: false
+          show: true
         }
-      ]
+      }
     };
   },
-  created: {
-  },
   methods: {
-    ...mapActions("storeTableFilter", ["updateFilter"]),
-    showHideAddNewFilter: function() {
+    ...mapActions("storeTableFilter", ["addFilter", "deleteFilter"]),
+    toggleAddNewFilter() {
       this.isAddNewFilter = !this.isAddNewFilter;
-      this.newFilter = {};
     },
-    updateActiveFilters(filter, isActive) {
-      this.updateFilter(filter, isActive);
-      this.showHideAddNewFilter();
+    getOptions() {
+      var arr = _.values(this.options);
+      return arr;
+    },
+    addOptionToFilter() {
+      this.addFilter(this.selectedFilter);
+      this.showOption(this.selectedFilter, false);
+      this.selectedFilter = null;
+    },
+    showOption(filter, isShown) {
+      this.options[filter.value].show = isShown;
+    },
+    removeFilter(filter) {
+      debugger;
+      this.deleteFilter(filter);
+      this.showOption(filter, true);
     }
   }
 };

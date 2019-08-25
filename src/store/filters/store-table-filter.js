@@ -4,9 +4,15 @@ const state = {
   fieldFilters: {
     '1': {
         readonly: false,
-        value: 'Field01',
-        label: 'Field01',
-        active: false
+        value: 'Apple',
+        label: 'Apple',
+        active: true
+    },
+    '2': {
+        readonly: false,
+        value: 'Facebook',
+        label: 'Facebook',
+        active: true
     }
   }
 };
@@ -41,7 +47,7 @@ const actions = {
 
 const getters = {
   getActiveFilters: (state, getters) => {
-		let selectedFilters = getters.fieldFilters;
+		let selectedFilters = state.fieldFilters;
 		let activeFilters = {};
 		Object.keys(selectedFilters).forEach(function(key) {
 			let filter = selectedFilters[key];

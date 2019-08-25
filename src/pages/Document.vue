@@ -401,7 +401,6 @@ export default {
         );
       });
     },
-
     toggleFilter() {
       this.showFilter = !this.showFilter;
     },
