@@ -7,11 +7,16 @@
         <div class="q-pa-md">
           <q-breadcrumbs active-color="white" style="font-size: 16px">
             <template v-slot:separator>
-              <q-icon size="1.5em" name="chevron_right" color="white"/>
+              <q-icon size="1.5em" name="chevron_right" color="white" />
             </template>
-            <q-breadcrumbs-el label="Home" icon="home" to="/" exact-active-class="text-weight-bolder"/>
-            <q-breadcrumbs-el label="Sales" to="/document" exact-active-class="text-weight-bolder"/>
-            <q-breadcrumbs-el label="Sales Order" exact-active-class="text-weight-bolder"/>
+            <q-breadcrumbs-el
+              label="Home"
+              icon="home"
+              to="/"
+              exact-active-class="text-weight-bolder"
+            />
+            <q-breadcrumbs-el label="Sales" to="/document" exact-active-class="text-weight-bolder" />
+            <q-breadcrumbs-el label="Sales Order" exact-active-class="text-weight-bolder" />
           </q-breadcrumbs>
         </div>
       </q-toolbar>
@@ -21,55 +26,50 @@
       v-model="drawer"
       :mini="!drawer || miniState"
       @click.capture="drawerClick"
-      :width="150"
+      :width="200"
       :breakpoint="500"
       show-if-above
       bordered
       content-class="bg-grey-3"
     >
-      <template v-slot:mini>
-        <q-scroll-area class="fit mini-slot cursor-pointer">
-          <div class="q-py-lg">
-            <div class="column items-center">
-              <q-icon name="inbox" color="blue" class="mini-icon" />
-              <q-icon name="star" color="orange" class="mini-icon" />
-              <q-icon name="send" color="purple" class="mini-icon" />
-              <q-icon name="drafts" color="teal" class="mini-icon" />
-              <q-icon name="home" color="red" class="mini-icon" />
-            </div>
-          </div>
-        </q-scroll-area>
-      </template>
-
       <q-scroll-area class="fit">
         <q-list padding>
           <q-item clickable v-ripple to="/" exact>
+            <q-item-section avatar>
+              <q-icon color="blue" name="inbox" />
+            </q-item-section>
             <q-item-section>List</q-item-section>
           </q-item>
 
           <q-item clickable v-ripple to="/document" exact>
+            <q-item-section avatar>
+              <q-icon color="orange" name="star" />
+            </q-item-section>
             <q-item-section>Document</q-item-section>
           </q-item>
 
           <q-item clickable v-ripple to="/setup" exact>
+            <q-item-section avatar>
+              <q-icon color="purple" name="send" />
+            </q-item-section>
             <q-item-section>Setup</q-item-section>
           </q-item>
 
           <q-item clickable v-ripple to="/auth" exact>
+            <q-item-section avatar>
+              <q-icon color="teal" name="drafts" />
+            </q-item-section>
             <q-item-section>Authentication</q-item-section>
           </q-item>
-          
+
           <q-item clickable v-ripple to="/wizard" exact>
+            <q-item-section avatar>
+              <q-icon color="red" name="home" />
+            </q-item-section>
             <q-item-section>Wizard</q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>
-
-      <!--
-          in this case, we use a button (can be anything)
-          so that user can switch back
-          to mini-mode
-      -->
       <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
         <q-btn dense round unelevated color="accent" icon="chevron_left" @click="miniState = true" />
       </div>
