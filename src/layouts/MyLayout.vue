@@ -1,28 +1,22 @@
-<template>
-  <q-layout view="hHh Lpr lff">
-    <q-header>
-      <q-toolbar>
-        <q-btn class="q-mr-xs" flat @click="drawer = !drawer" dense round icon="menu" />
-        <q-separator dark vertical spaced />
-        <div class="q-pa-md">
-          <q-breadcrumbs active-color="white" style="font-size: 16px">
-            <template v-slot:separator>
-              <q-icon size="1.5em" name="chevron_right" color="white" />
-            </template>
-            <q-breadcrumbs-el
+<template lang="pug">
+  q-layout(view="hHh Lpr lff")
+    q-header
+      q-toolbar
+        q-btn.q-mr-xs(flat @click="drawer = !drawer" dense round icon="menu")
+        q-separator(dark vertical spaced)
+        div.q-pa-md
+          q-breadcrumbs(active-color="white" style="font-size: 16px")
+            template(v-slot:separator)
+              q-icon(size="1.5em" name="chevron_right" color="white")
+            q-breadcrumbs-el(
               label="Home"
               icon="home"
               to="/"
-              exact-active-class="text-weight-bolder"
-            />
-            <q-breadcrumbs-el label="Sales" to="/document" exact-active-class="text-weight-bolder" />
-            <q-breadcrumbs-el label="Sales Order" exact-active-class="text-weight-bolder" />
-          </q-breadcrumbs>
-        </div>
-      </q-toolbar>
-    </q-header>
+              exact-active-class="text-weight-bolder")
+            q-breadcrumbs-el(label="Sales" to="/document" exact-active-class="text-weight-bolder")
+            q-breadcrumbs-el(label="Sales Order" exact-active-class="text-weight-bolder")
 
-    <q-drawer
+    q-drawer(
       v-model="drawer"
       :mini="!drawer || miniState"
       @click.capture="drawerClick"
@@ -30,58 +24,37 @@
       :breakpoint="500"
       show-if-above
       bordered
-      content-class="bg-grey-3"
-    >
-      <q-scroll-area class="fit">
-        <q-list padding>
-          <q-item clickable v-ripple to="/" exact>
-            <q-item-section avatar>
-              <q-icon color="blue" name="inbox" />
-            </q-item-section>
-            <q-item-section>List</q-item-section>
-          </q-item>
+      content-class="bg-grey-3")
+      q-scroll-area.fit
+        q-list(padding)
+          q-item(clickable v-ripple to="/" exact)
+            q-item-section(avatar)
+              q-icon(color="blue" name="inbox")
+            q-item-section List
+          q-item(clickable v-ripple to="/document" exact)
+            q-item-section(avatar)
+              q-icon(color="orange" name="star")
+            q-item-section Document
+          q-item(clickable v-ripple to="/setup" exact)
+            q-item-section(avatar)
+              q-icon(color="purple" name="send")
+            q-item-section Setup
+          q-item(clickable v-ripple to="/auth" exact)
+            q-item-section(avatar)
+              q-icon(color="teal" name="drafts")
+            q-item-section Authentication
 
-          <q-item clickable v-ripple to="/document" exact>
-            <q-item-section avatar>
-              <q-icon color="orange" name="star" />
-            </q-item-section>
-            <q-item-section>Document</q-item-section>
-          </q-item>
+          q-item(clickable v-ripple to="/wizard" exact)
+            q-item-section(avatar)
+              q-icon(color="red" name="home")
+            q-item-section Wizard
+      div.q-mini-drawer-hide.absolute(style="top: 15px; right: -17px")
+        q-btn(dense round unelevated color="accent" icon="chevron_left" @click="miniState = true")
 
-          <q-item clickable v-ripple to="/setup" exact>
-            <q-item-section avatar>
-              <q-icon color="purple" name="send" />
-            </q-item-section>
-            <q-item-section>Setup</q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple to="/auth" exact>
-            <q-item-section avatar>
-              <q-icon color="teal" name="drafts" />
-            </q-item-section>
-            <q-item-section>Authentication</q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple to="/wizard" exact>
-            <q-item-section avatar>
-              <q-icon color="red" name="home" />
-            </q-item-section>
-            <q-item-section>Wizard</q-item-section>
-          </q-item>
-        </q-list>
-      </q-scroll-area>
-      <div class="q-mini-drawer-hide absolute" style="top: 15px; right: -17px">
-        <q-btn dense round unelevated color="accent" icon="chevron_left" @click="miniState = true" />
-      </div>
-    </q-drawer>
-
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-    <div class="q-pa-md">
-      <q-ajax-bar ref="bar" position="bottom" color="accent" size="5px" skip-hijack />
-    </div>
-  </q-layout>
+    q-page-container
+      router-view
+    div.q-pa-md
+      q-ajax-bar(ref="bar" position="bottom" color="accent" size="5px" skip-hijack)
 </template>
 
 <script>
