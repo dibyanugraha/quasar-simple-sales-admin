@@ -22,9 +22,9 @@
                 dense
                 color="primary"
                 icon="delete"
-                @click.stop="removeFilter(fieldFilter)")
-      q-card(v-if="isAddNewFilter")
-        q-card-section
+                @click.stop="hideoption(fieldFilter)")
+      q-card
+        q-card-section(v-if="isAddNewFilter")
           q-select(
             v-model="selectedFilter"
             outlined
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 import { mapActions } from "vuex";
 import _ from "lodash";
 
@@ -53,7 +52,7 @@ export default {
           value: "",
           show: true
           },
-      isAddNewFilter: true,
+      isAddNewFilter: false,
       options: {
         "Google" :{
           label: "Google",
@@ -79,7 +78,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions("storeTableFilter", ["addFilter", "deleteFilter"]),
+    ...mapActions("storeTableFilter", ["addFilter", "deleteFilter", "updateFilter"]),
     toggleAddNewFilter() {
       this.isAddNewFilter = !this.isAddNewFilter;
     },
@@ -89,16 +88,14 @@ export default {
     },
     addOptionToFilter() {
       this.addFilter(this.selectedFilter);
-      this.showOption(this.selectedFilter, false);
+      this.showOption(this.selectedFilter);
       this.selectedFilter = null;
     },
-    showOption(filter, isShown) {
-      this.options[filter.value].show = isShown;
+    showOption(filter) {
+      this.updateFilter(filter);
     },
-    removeFilter(filter) {
-      debugger;
+    hideoption(filter) {
       this.deleteFilter(filter);
-      this.showOption(filter, true);
     }
   }
 };

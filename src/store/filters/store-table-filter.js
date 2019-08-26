@@ -2,17 +2,17 @@ import Vue from "vue";
 
 const state = {
   fieldFilters: {
-    '1': {
+    "Apple": {
         readonly: false,
-        value: 'Apple',
-        label: 'Apple',
-        active: true
+        value: "Apple",
+        label: "Apple",
+        show: true
     },
-    '2': {
+    "Facebook": {
         readonly: false,
-        value: 'Facebook',
-        label: 'Facebook',
-        active: true
+        value: "Facebook",
+        label: "Facebook",
+        show: true
     }
   }
 };
@@ -24,6 +24,12 @@ const mutations = {
   DELETE_FILTER(state, id) {
     Vue.delete(state.fieldFilters, id);
   },
+  DISABLE_FILTER(state, id) {
+    state.fieldFilters[id].show = false;
+  },
+  ENABLE_FILTER(state, id) {
+    state.fieldFilters[id].show = true;
+  },
   ADD_FILTER(state, payload) {
     Vue.set(state.fieldFilters, payload.id, payload.filter);
   }
@@ -31,12 +37,15 @@ const mutations = {
 
 const actions = {
   updateFilter({ commit }, payload) {
-    commit("UPDATE_FILTER", payload);
+    // commit("UPDATE_FILTER", payload);
+    commit("ENABLE_FILTER", payload.value);
   },
   deleteFilter({ commit }, payload) {
-    commit("DELETE_FILTER", payload);
+    // commit("DELETE_FILTER", payload);
+    commit("DISABLE_FILTER", payload.value);
   },
   addFilter({ commit }, filter) {
+    filter.readonly = false;
     let payload = {
       id: filter.value,
       filter: filter
@@ -51,7 +60,7 @@ const getters = {
 		let activeFilters = {};
 		Object.keys(selectedFilters).forEach(function(key) {
 			let filter = selectedFilters[key];
-			if (filter.active) {
+			if (filter.show) {
 				activeFilters[key] = filter;
 			}
 		});

@@ -76,7 +76,6 @@ export default {
   data() {
     return {
       showFilter: false,
-      isTableEditable: true,
       model: null,
       options: stringOptions,
       loading: true,
