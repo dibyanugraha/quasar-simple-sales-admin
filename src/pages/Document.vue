@@ -43,10 +43,7 @@
               q-input(
                 v-model="name"
                 label="Your name *")
-              q-input.text-right(
-                v-model="age"
-                label="Your age *")
-              q-input(v-model="date" mask="date" label="Minimum Posting Date" :rules="['date']")
+              q-input(v-model="date" mask="date" label="Minimum Posting Date")
                 template(v-slot:append)
                   q-icon(name="event" class="cursor-pointer")
                     q-popup-proxy(ref="qDateProxy" transition-show="scale" transition-hide="scale")
@@ -56,11 +53,17 @@
                 use-input
                 hide-selected
                 fill-input
-                dense
                 :options="options"
-                label="Something"
+                label="Pick something"
                 @filter="filterFn"
                 :options-dense="true")
+              q-input(label="Wake up time" v-model="time" mask="time" :rules="['time']")
+                template(v-slot:append)
+                  q-icon(name="access_time" class="cursor-pointer")
+                    q-popup-proxy(transition-show="scale" transition-hide="scale")
+                      q-time(
+                        v-model="time"
+                        format24h)
             div.col.q-ml-md
               q-list(padding)
                 q-item(v-ripple)
@@ -192,6 +195,8 @@ const stringOptions = ["Google", "Facebook", "Twitter", "Apple", "Oracle"];
 export default {
   data() {
     return {
+      time: '10:56',
+      timeWithSeconds: '10:56:00',
       myFilterInput: '',
       notif1: true,
       mic: 8,
