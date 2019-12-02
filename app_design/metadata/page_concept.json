@@ -1,5 +1,50 @@
-[
+{
+    "id": "someId",
+    "name": "page name",
+    "description": "a simple page",
+    "type": "card",
+    "captions": {
+        "en-US": "A simple page",
+        "id-ID": ""
+    },
+    "editable": true,
+    "events": {
+
+    },
+    "components" :
     {
-        "page":"A page"
+
     }
-]
+}
+
+ID	30
+Name	Item Card
+Caption	Item Card
+CaptionML	ENU=Item Card
+UsageCategory	<None>
+ApplicationArea	<Undefined>
+AccessByPermission	<Undefined>
+Editable	<Yes>
+Description	<>
+Permissions	<Undefined>
+PageType	Card
+InstructionalTextML	<Undefined>
+CardPageID	<Undefined>
+DataCaptionExpr	<Undefined>
+RefreshOnActivate	Yes
+PromotedActionCategoriesML	ENU=New,Process,Report,Item,History,Special Sales Prices & Discounts,Approve,Request Approval
+SourceTable	Item
+SourceTableView	<Undefined>
+InsertAllowed	<Yes>
+ModifyAllowed	<Yes>
+DeleteAllowed	<Yes>
+DelayedInsert	<No>
+ShowFilter	<Yes>
+MultipleNewLines	<No>
+SaveValues	<No>
+AutoSplitKey	<No>
+DataCaptionFields	<Undefined>
+ODataKeyFields	<Undefined>
+SourceTableTemporary	<No>
+LinksAllowed	<Yes>
+PopulateAllFields	<Undefined>
